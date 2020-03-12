@@ -28,7 +28,7 @@ printl(List l, Type t)
 		switch(t){
 		case integer:
 			// This looks ugly because `n` is being cast to an `int*` and then dereferenced
-			// Dereferencing yields the integer value stored in the allocated memory
+			// Dereferencing yields the integer value stored in the memory pointed to
 			printf("%d", *((int*)n->dat));
 			break;
 		case floating:
@@ -148,11 +148,12 @@ main()
 	char *diane = calloc(6, sizeof (char));
 	
 	/* 
-	You can't do
+	You don't want to do
 	
 		diane = "Diane";
 		
-	as `diane` is allocated and is a pointer.
+	as `diane` is allocated and is a pointer. The string constant will be on
+		the stack and cease to be usable once the owner function returns.  
 	
 	We want to 'copy' values from the constant "Diane" to be stored
 		in the allocated memory inside `diane`. 
